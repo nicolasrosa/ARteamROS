@@ -188,3 +188,7 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+# Creates the executable and links the catkin libraries
+add_executable(quat2yaw src/quat2yaw.cpp)
+target_link_libraries(quat2yaw ${catkin_LIBRARIES})
