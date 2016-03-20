@@ -24,15 +24,15 @@ void robotSpeedsCallback(const geometry_msgs::TwistPtr& msg) {
     
     // Check if ROS connection is fine each iteration
     
-        // Build message according to a logic.
-        velAngularWheelL_msg.data = (v+(b/2.0)*w)/R;
-        velAngularWheelR_msg.data = (v-(b/2.0)*w)/R;
+    // Build message according to a logic.
+    velAngularWheelL_msg.data = (v+(b/2.0)*w)/R;
+    velAngularWheelR_msg.data = (v-(b/2.0)*w)/R;
         
-        // Publish message.
-        //std::cout << "Publishing..." << std::endl;
-        ROS_INFO("Publishing motors linear velocities...");
-        pubL.publish(velAngularWheelL_msg);
-        pubR.publish(velAngularWheelR_msg);
+    // Publish message.
+    //std::cout << "Publishing..." << std::endl;
+    ROS_INFO("Publishing motors linear velocities...");
+    pubL.publish(velAngularWheelL_msg);
+    pubR.publish(velAngularWheelR_msg);
 }
 
 int main(int argc, char **argv){    
@@ -50,7 +50,8 @@ int main(int argc, char **argv){
     pubR = node.advertise<std_msgs::Float64>("/vrep/vehicle/motorRightSpeed",queue_size);
     
     // Declare topic to subscriber
-    ros::Subscriber sub = node.subscribe("/object_avoidance/robotSpeeds", queue_size, robotSpeedsCallback);
+    //ros::Subscriber sub = node.subscribe("/object_avoidance/robotSpeeds", queue_size, robotSpeedsCallback);
+    ros::Subscriber sub = node.subscribe("/cmd_vel", queue_size, robotSpeedsCallback);
     
     // Define ROS loop rate (Hertz!).
     //int frequency = 60;
