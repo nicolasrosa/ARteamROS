@@ -69,13 +69,13 @@ void odometryCallback(const nav_msgs::OdometryConstPtr &msg) {
     double dTheta = normalizeAngle(psi_d-p.theta);
     
     w = K_w*dTheta;
-    if(std::abs(w>0.75)){
+    if(std::abs(w)>0.75){
         w = 0.75*dTheta/std::abs(dTheta);
     }
     
 //    if(d > 0.1){
 //        d > 1 ? robotSpeeds.linear.x = K_v : robotSpeeds.linear.x = K_v*d;
-    robotSpeeds.linear.x = 0.5;    
+    robotSpeeds.linear.x = 1; // 0.5 -> Robot with 1 sonar sensor
     //robotSpeeds.angular.z = K_w*dTheta;
     robotSpeeds.angular.z = w;
         
@@ -86,7 +86,7 @@ void odometryCallback(const nav_msgs::OdometryConstPtr &msg) {
 //        robotSpeeds.angular.z = 0;
 //    }
 //    
-    ROS_INFO("x = %f\ty = %f\tyaw: %f\ttheta: %f\txc: %f\tyc: %f",p.x,p.y,p.theta,theta,pc.x,pc.y);
+    ROS_INFO("x: %f\ty: %f\tyaw: %f\ttheta: %f\txc: %f\tyc: %f",p.x,p.y,p.theta,theta,pc.x,pc.y);
     pub.publish(robotSpeeds);
 }
 

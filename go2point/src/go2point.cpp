@@ -35,7 +35,6 @@ double normalizeAngle(double angle){
 // It's called everytime that there is a new message
 void odometryCallback(const nav_msgs::OdometryConstPtr &msg) {
     double x = msg->pose.pose.position.x;
-    
     double y = msg->pose.pose.position.y;
     double yaw = tf::getYaw(msg->pose.pose.orientation);
    

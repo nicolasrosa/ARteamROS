@@ -1,0 +1,4 @@
+<launch>
+	<node name="kinePub_float32" pkg="kine_controller" type="kinePub_float32" output="screen" />
+	<node name="objAvoidance" pkg="obstacle_avoidance_3sonars" type="objAvoidance_3sonars" output="screen" />
+</launch>

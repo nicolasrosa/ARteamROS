@@ -190,3 +190,6 @@ include_directories(
 # Creates the executable and links the catkin libraries
 add_executable(kinePub src/kine_controller.cpp)
 target_link_libraries(kinePub ${catkin_LIBRARIES})
+
+add_executable(kinePub_float32 src/kine_controller_float32.cpp)
+target_link_libraries(kinePub_float32 ${catkin_LIBRARIES})
