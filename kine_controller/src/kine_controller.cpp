@@ -17,8 +17,6 @@ std_msgs::Float64 velAngularWheelR_msg;
 // Subscriber routine
 // It's called everytime that there is a new message
 void robotSpeedsCallback(const geometry_msgs::TwistPtr& msg) {
-    ROS_INFO("Received: Robot Speeds!");
-    
     v = msg->linear.x;
     w = msg->angular.z;
     
@@ -30,7 +28,7 @@ void robotSpeedsCallback(const geometry_msgs::TwistPtr& msg) {
         
     // Publish message.
     //std::cout << "Publishing..." << std::endl;
-    ROS_INFO("Publishing motors linear velocities...");
+    ROS_INFO("Received: Robot Speeds! Publishing motors linear velocities to Vrep...");
     pubL.publish(velAngularWheelL_msg);
     pubR.publish(velAngularWheelR_msg);
 }
@@ -52,7 +50,7 @@ int main(int argc, char **argv){
     // Declare topic to subscriber
     //ros::Subscriber sub = node.subscribe("/object_avoidance/robotSpeeds", queue_size, robotSpeedsCallback);
     //ros::Subscriber sub = node.subscribe("/cmd_vel", queue_size, robotSpeedsCallback);
-    ros::Subscriber sub = node.subscribe("/go2point/robotSpeeds", queue_size, robotSpeedsCallback);
+    ros::Subscriber sub = node.subscribe("/cmd_vel", queue_size, robotSpeedsCallback);
     
     
     // Define ROS loop rate (Hertz!).
